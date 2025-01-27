@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vanilla App Template</title>
+    <title>Home work 11</title>
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
@@ -14,6 +14,17 @@
       <!-- Loads the specified .html file -->
       <load src="./partials/vite-promo.html" />
       <load src="./partials/badges.html" />
+
+      <div class="container">
+        <form class="js-search-form">
+          
+          <input id="user_query" type="text" class="searchInput" placeholder="Search images..." autocomplete="off" name="user_query" required />
+          <button type="submit" class="searchBttn">Search</button>
+        </form>
+        <div class="js-gallery"></div>
+        <div class="loader">Loading images, please wait...</div>
+        <button class="load-more-btn">Load More</button>
+      </div>
     </main>
 
     <load src="./partials/footer.html" />
