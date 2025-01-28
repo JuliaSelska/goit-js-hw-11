@@ -1,5 +1,5 @@
 import { createGalleryCardTemplate } from './js/render-functions.js';
-import { fetchPhotos } from './js/pixabay-api';
+import { fetchPhotosByQuery } from './js/pixabay-api.js';
 
 // Описаний у документації
 import iziToast from "izitoast";
@@ -12,25 +12,42 @@ import SimpleLightbox from 'simplelightbox';
 // Додатковий імпорт стилів
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-
 const searchFormEl = document.querySelector('.js-search-form');
 const galleryEl = document.querySelector('.js-gallery');
+const lightbox = new SimpleLightbox('.js-gallery a');
+
 
 const onSearchFormSubmit = event => {
-  event.preventDefault();
+  const loader = document.querySelector('.loader');event.preventDefault();
 
   const searchedQuery = event.currentTarget.elements.user_query.value.trim();
 
   if (searchedQuery === '') {
-    alert('Поле має бути заповнено!');
+    iziToast.error({
+      title: '',
+      message: 'Please enter your request',
+      messageColor: '#fafafb',
+      position: 'topRight',
+      backgroundColor: '#ef4040',
+    });
 
     return;
   }
 
-  fetchPhotosByQuery(searchedQuery)
+  document.querySelector('.loader').classList.add('show-loader');
+  
+
+ fetchPhotosByQuery(searchedQuery)
     .then(data => {
       if (data.total === 0) {
-        alert('Sorry, there are no images matching your search query. Please try again!');
+         iziToast.error({
+          title: '',
+          message:
+            'Sorry, there are no images matching your search query. Please try again!',
+          messageColor: '#fafafb',
+          position: 'topRight',
+          backgroundColor: '#ef4040',
+        });
 
         galleryEl.innerHTML = '';
 
@@ -38,13 +55,17 @@ const onSearchFormSubmit = event => {
 
         return;
       }
+      
+  const galleryTemplate = data.hits.map(el => createGalleryCardTemplate(el)).join('');
 
-      const galleryTemplate = data.results.map(el => createGalleryCardTemplate(el)).join('');
-
-      galleryEl.innerHTML = galleryTemplate;
+      galleryEl.innerHTML = galleryTemplate; lightbox.refresh();
     })
+  
     .catch(err => {
       console.log(err);
+     })
+    .finally(() => {
+      loader.classList.remove('show-loader');
     });
 };
 
