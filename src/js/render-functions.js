@@ -4,7 +4,7 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 
-
+//GALLERY CARD TEMPLATE//
 export const createGalleryCardTemplate = imgInfo => {
   
   return  `
@@ -31,4 +31,14 @@ export const createGalleryCardTemplate = imgInfo => {
         </a>
     </li>
   `;
+};
+
+//LOADER//
+
+ export const showLoader = () => {
+  loader.classList.remove('hidden');
+};
+
+export const hideLoader = () => {
+  loader.classList.add('hidden');
 };

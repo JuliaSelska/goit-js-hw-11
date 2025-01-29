@@ -17,6 +17,7 @@ const galleryEl = document.querySelector('.js-gallery');
 const lightbox = new SimpleLightbox('.js-gallery a');
 
 
+
 const onSearchFormSubmit = event => {
   const loader = document.querySelector('.loader');event.preventDefault();
 
@@ -34,7 +35,8 @@ const onSearchFormSubmit = event => {
     return;
   }
 
-  document.querySelector('.loader').classList.add('show-loader');
+  document.querySelector('.loader').classList.remove('hidden');
+  
   
 
  fetchPhotosByQuery(searchedQuery)
@@ -65,7 +67,7 @@ const onSearchFormSubmit = event => {
       console.log(err);
      })
     .finally(() => {
-      loader.classList.remove('show-loader');
+      loader.classList.add('hidden');
     });
 };
 

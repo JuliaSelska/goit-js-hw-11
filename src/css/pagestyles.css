@@ -86,6 +86,10 @@ li {
     perspective: 500px;
 }
 
+.hidden {
+    display: none;
+}
+
 .loader:before,
 .loader:after {
     content: "";
