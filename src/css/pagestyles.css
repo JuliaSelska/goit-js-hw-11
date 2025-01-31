@@ -140,7 +140,10 @@ li {
     border: none;
     border-radius: 8px;
 }
-
+ .is-hidden{
+    display: none;
+ }
+ 
 /*Image card*/
 
 .js-gallery {

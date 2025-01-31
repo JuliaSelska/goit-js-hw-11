@@ -32,13 +32,3 @@ export const createGalleryCardTemplate = imgInfo => {
     </li>
   `;
 };
-
-//LOADER//
-
- export const showLoader = () => {
-  loader.classList.remove('hidden');
-};
-
-export const hideLoader = () => {
-  loader.classList.add('hidden');
-};
